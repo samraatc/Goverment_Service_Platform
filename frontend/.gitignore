@@ -1,0 +1,38 @@
+# ─── Backend .gitignore ───────────────────────────────────────────────────────
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.staging
+# Keep the example
+!.env.example
+
+# Logs
+logs/
+*.log
+pm2.log
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Uploads directory
+uploads/
+
+# Temp files
+tmp/
+temp/
+
+# OS
+.DS_Store
+Thumbs.db

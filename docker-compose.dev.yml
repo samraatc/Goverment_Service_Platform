@@ -1,0 +1,63 @@
+version: '3.9'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: govservices-mongodb-dev
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_dev_data:/data/db
+    networks:
+      - govservices-dev
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: builder
+    container_name: govservices-backend-dev
+    restart: unless-stopped
+    command: npm run dev
+    env_file:
+      - ./backend/.env
+    environment:
+      NODE_ENV: development
+      MONGODB_URI: mongodb://mongodb:27017/govservices
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend/src:/app/src
+      - backend_dev_logs:/app/logs
+    depends_on:
+      - mongodb
+    networks:
+      - govservices-dev
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: builder
+    container_name: govservices-frontend-dev
+    restart: unless-stopped
+    command: npm run dev -- --host 0.0.0.0
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/src:/app/src
+    depends_on:
+      - backend
+    networks:
+      - govservices-dev
+
+volumes:
+  mongo_dev_data:
+  backend_dev_logs:
+
+networks:
+  govservices-dev:
+    driver: bridge

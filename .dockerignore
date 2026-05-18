@@ -1,0 +1,56 @@
+# ─── Root .dockerignore ───────────────────────────────────────────────────────
+# Applied when building from the root context.
+
+# Version control
+.git/
+.gitignore
+.gitattributes
+
+# GitHub Actions
+.github/
+
+# Documentation
+*.md
+docs/
+
+# Environment files
+.env*
+!.env.example
+
+# Node modules (rebuilt inside container)
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+build/
+**/dist/
+**/build/
+
+# Logs
+logs/
+*.log
+**/logs/
+
+# Test coverage
+coverage/
+**/coverage/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# SSL certs (mounted as volumes in production)
+nginx/ssl/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Docker files themselves (no inception)
+.dockerignore
+docker-compose*.yml

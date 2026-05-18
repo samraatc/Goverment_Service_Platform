@@ -1,0 +1,49 @@
+# ─── Backend .dockerignore ────────────────────────────────────────────────────
+
+# Version control
+.git/
+.gitignore
+
+# Node modules (reinstalled via npm ci)
+node_modules/
+
+# Build artifacts (rebuilt inside container)
+dist/
+
+# Environment files (injected at runtime)
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# Test & coverage
+coverage/
+**/*.test.ts
+**/*.spec.ts
+**/__tests__/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# PM2 (not needed inside container)
+ecosystem.config.js
+
+# Documentation
+*.md
+docs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+tmp/
+temp/
+uploads/

@@ -1,0 +1,42 @@
+# ─── Frontend .dockerignore ───────────────────────────────────────────────────
+
+# Version control
+.git/
+.gitignore
+
+# Node modules (reinstalled via npm ci)
+node_modules/
+
+# Build output (rebuilt inside container)
+dist/
+
+# Environment (injected as build-args or at runtime)
+.env
+.env.*
+!.env.example
+
+# Test & coverage
+coverage/
+**/*.test.tsx
+**/*.spec.tsx
+**/__tests__/
+**/*.test.ts
+**/*.spec.ts
+
+# Vite cache
+.vite/
+
+# Documentation
+*.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Storybook
+storybook-static/
+.storybook/
