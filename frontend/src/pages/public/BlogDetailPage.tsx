@@ -109,7 +109,7 @@ export const BlogDetailPage = () => {
             {blog.tags && blog.tags.length > 0 && (
               <div className="flex items-center gap-2 flex-wrap mt-8 pt-6 border-t border-slate-200 dark:border-dark-border">
                 <Tag className="w-4 h-4 text-slate-400" />
-                {blog.tags.map((tag) => (
+                {blog.tags.map((tag: string) => (
                   <span key={tag} className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-sm">
                     {tag}
                   </span>

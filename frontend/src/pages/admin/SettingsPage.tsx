@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { Save, RefreshCw } from 'lucide-react';
@@ -23,12 +23,16 @@ export const SettingsPage = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['admin', 'settings'],
     queryFn: () => adminApi.getSettings().then((r) => r.data.data as Setting[]),
-    onSuccess: (settings: Setting[]) => {
-      const vals: Record<string, unknown> = {};
-      settings.forEach((s) => { vals[s.key] = s.value; });
-      setLocalValues(vals);
-    },
   });
+
+  // Initialise local form values whenever the query resolves
+  useEffect(() => {
+    if (data) {
+      const vals: Record<string, unknown> = {};
+      (data as Setting[]).forEach((s) => { vals[s.key] = s.value; });
+      setLocalValues(vals);
+    }
+  }, [data]);
 
   const saveMutation = useMutation({
     mutationFn: (updates: Array<{ key: string; value: unknown }>) => adminApi.updateSettings(updates),
@@ -93,7 +97,7 @@ export const SettingsPage = () => {
           <p className="text-slate-500 dark:text-slate-400 text-sm mt-0.5">Manage platform-wide configuration</p>
         </div>
         <button onClick={handleSave} disabled={saveMutation.isPending} className="btn-primary">
-          <Save className="w-4 h-4" /> {saveMutation.isPending ? 'Saving…' : 'Save Changes'}
+          <Save className="w-4 h-4" /> {saveMutation.isPending ? 'Saving...' : 'Save Changes'}
         </button>
       </div>
 

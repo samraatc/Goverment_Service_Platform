@@ -55,9 +55,13 @@ export const ServiceCard = ({ service, index = 0 }: ServiceCardProps) => {
 
         {/* Verification */}
         {service.verificationStatus === 'verified' ? (
-          <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" title="Verified" />
+          <span aria-label="Verified">
+            <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
+          </span>
         ) : service.verificationStatus === 'broken' ? (
-          <AlertTriangle className="w-4 h-4 text-red-500 shrink-0" title="Broken link" />
+          <span aria-label="Broken link">
+            <AlertTriangle className="w-4 h-4 text-red-500 shrink-0" />
+          </span>
         ) : null}
       </div>
 

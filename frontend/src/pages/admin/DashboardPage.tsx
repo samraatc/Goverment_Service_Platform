@@ -49,6 +49,15 @@ const StatCard = ({ title, value, icon: Icon, color, bgColor, delta, deltaPositi
   </motion.div>
 );
 
+import { ServiceStatus, VerificationStatus } from '../../types';
+
+interface RecentService {
+  _id: string;
+  title: string;
+  status: ServiceStatus;
+  verificationStatus: VerificationStatus;
+}
+
 export const DashboardPage = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['admin', 'dashboard'],
@@ -62,7 +71,7 @@ export const DashboardPage = () => {
   });
 
   const stats = data?.stats;
-  const recentServices = data?.recentServices || [];
+  const recentServices: RecentService[] = data?.recentServices || [];
   const topServices = data?.topServices || [];
 
   // Process chart data

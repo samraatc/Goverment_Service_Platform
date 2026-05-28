@@ -57,10 +57,10 @@ const UserSchema = new Schema<IUser>(
   {
     timestamps: true,
     toJSON: {
-      transform: (_doc, ret) => {
-        delete ret.password;
-        delete ret.refreshToken;
-        delete ret.__v;
+      transform: (_doc, ret: Record<string, unknown>) => {
+        ret['password'] = undefined;
+        ret['refreshToken'] = undefined;
+        ret['__v'] = undefined;
         return ret;
       },
     },
@@ -77,7 +77,7 @@ UserSchema.index({ createdAt: -1 });
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   const salt = await bcrypt.genSalt(12);
-  this.password = await bcrypt.hash(this.password, salt);
+  this.password = await bcrypt.hash(this.password!, salt);
   next();
 });
 
