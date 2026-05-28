@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import Service from '../models/Service.model';
-import Category from '../models/Category.model';
-import Blog from '../models/Blog.model';
+import {Service} from '../models/Service.model';
+import {Category} from '../models/Category.model';
+import {Blog} from '../models/Blog.model';
 import { catchAsync } from '../utils/catchAsync';
 
 const BASE_URL = process.env.CLIENT_URL || 'https://govservices.com';
